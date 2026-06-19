@@ -92,38 +92,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-    document.getElementById('contact').addEventListener('submit', function(e) {
-        e.preventDefault(); // Bloque la redirection automatique moche
-        
-        var form = this;
-        var formData = new FormData(form);
-        
-        // Convertit les données du formulaire en format JSON lisible par Formspark
-        var data = Object.fromEntries(formData.entries());
-        
-        // Envoie les données en arrière-plan à Formspark
-        // ⚠️ REMPLACE "TON_ID_FORMSPARK" PAR TON VRAI ID DANS L'URL CI-DESSOUS
-        fetch("https://submit-form.com/I6Zups90Q", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (response.ok) {
-                // Redirection instantanée sur ta page GitHub Pages !
-                window.location.href = 'merci.html';
-            } else {
-                alert("Une erreur est survenue, veuillez réessayer.");
-            }
-        })
-        .catch(error => {
-            alert("Une erreur de connexion est survenue.");
-        });
-    });
-    </script>
 </body>
 </html>
