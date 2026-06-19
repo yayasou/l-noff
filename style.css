@@ -739,3 +739,36 @@ textarea {
         padding: 0 20px;
     }
 }
+@media (max-width: 560px) {
+    .home-hero h1 {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important; /* Permet au texte de prendre toute la largeur sans se couper */
+        margin-top: 12px;
+    }
+}/* --- CORRECTION POUR LE TITRE HERO SUR MOBILE --- */
+@media (max-width: 560px) {
+    .home-hero-content .eyebrow {
+        font-family: 'Inter', Arial, sans-serif !important;
+        font-size: 18px !important; /* Augmente cette valeur si tu veux encore plus grand */
+        font-weight: 800 !important; /* Très épais/streetwear */
+        letter-spacing: 0.05em;
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    /* Le petit texte de description sous le titre */
+    .home-hero h1 {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-top: 10px;
+    }
+}
+home-hero-content {
+    width: min(800px, calc(100% - 48px)) !important; /* On passe de 410px à 800px pour donner de la place */
+}
+
+.home-hero h1 {
+    max-width: 100% !important; /* On retire la limite de 390px qui coupait le texte */
+    font-size: 14px; /* Tu peux l'agrandir un poil si tu veux (il était à 13px) */
+    line-height: 1.6;
