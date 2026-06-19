@@ -86,5 +86,31 @@
     </footer>
 
     <script src="script.js"></script>
+<script>
+document.getElementById('contact').addEventListener('submit', function(e) {
+    e.preventDefault(); // Empêche le rechargement de la page par défaut
+    
+    var form = this;
+    var data = new FormData(form);
+    
+    // Envoie les données à Formspree en arrière-plan
+    fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            // Si l'envoi fonctionne, on redirige vers ta page merci !
+            window.location.href = 'merci.html';
+        } else {
+            alert("Une erreur est survenue, veuillez réessayer.");
+        }
+    }).catch(error => {
+        alert("Une erreur est survenue, veuillez réessayer.");
+    });
+});
+</script>
 </body>
 </html>
