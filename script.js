@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // 1. GESTION DE LA SÉLECTION DES TAILLES
     const sizeButtons = document.querySelectorAll(".size-btn:not(.out-of-stock)");
     let selectedSize = localStorage.getItem("lun_selected_size") || "";
 
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateSelectedSize();
 
+    // 2. SÉCURITÉ DU BOUTON AJOUTER AU PANIER
     const requestButton = document.querySelector(".add-to-cart-btn");
     if (requestButton) {
         requestButton.addEventListener("click", (event) => {
@@ -28,29 +30,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // 3. REMPLISSAGE AUTOMATIQUE DE LA TAILLE DANS LE PANIER
     const orderForm = document.querySelector(".order-form");
     if (orderForm) {
         const sizeSelect = orderForm.querySelector('select[name="size"]');
         if (sizeSelect && selectedSize) {
             sizeSelect.value = selectedSize;
         }
-
-        orderForm.addEventListener("submit", (event) => {
-            const isNetlifyForm = orderForm.hasAttribute("data-netlify");
-
-            if (!isNetlifyForm || window.location.protocol === "file:") {
-                event.preventDefault();
-                orderForm.innerHTML = `
-                    <div class="form-confirmation">
-                        <p class="eyebrow">Demande préparée</p>
-                        <h2>Merci. Pour recevoir les demandes par email, il faudra connecter ce formulaire à un service comme Netlify Forms, Formspree ou un backend.</h2>
-                        <a href="index.html" class="request-btn">Retour à l'accueil</a>
-                    </div>
-                `;
-            }
-        });
     }
 
+    // 4. MOTEUR DE RECHERCHE
     const searchInput = document.querySelector(".search-custom");
     if (searchInput) {
         searchInput.addEventListener("keydown", (event) => {
