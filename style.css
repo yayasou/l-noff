@@ -717,59 +717,50 @@ textarea {
     color: var(--black);
     border-color: var(--white);
 }
-@media (max-width: 480px) {
-    /* Aligner la recherche et le bouton demande l'un sous l'autre */
-    .header-actions, .search-container { 
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        align-items: center;
-    }
 
-    .search-bar {
-        width: 80% !important; /* Force la barre à prendre une bonne largeur sur mobile */
-    }
-
-    /* Ajuster le menu de navigation pour qu'il soit propre sur deux lignes ou en liste */
-    .nav-links {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Fait une belle grille de 2 colonnes bien alignées */
-        gap: 12px;
-        text-align: center;
-        padding: 0 20px;
-    }
-}
-@media (max-width: 560px) {
-    .home-hero h1 {
-        font-size: 14px !important;
-        line-height: 1.6 !important;
-        max-width: 100% !important; /* Permet au texte de prendre toute la largeur sans se couper */
-        margin-top: 12px;
-    }
-}/* --- CORRECTION POUR LE TITRE HERO SUR MOBILE --- */
-@media (max-width: 560px) {
-    .home-hero-content .eyebrow {
-        font-family: 'Inter', Arial, sans-serif !important;
-        font-size: 18px !important; /* Augmente cette valeur si tu veux encore plus grand */
-        font-weight: 800 !important; /* Très épais/streetwear */
-        letter-spacing: 0.05em;
-        display: block;
-        margin-bottom: 8px;
-    }
-
-    /* Le petit texte de description sous le titre */
-    .home-hero h1 {
-        font-size: 13px;
-        line-height: 1.5;
-        margin-top: 10px;
-    }
-}
-home-hero-content {
-    width: min(800px, calc(100% - 48px)) !important; /* On passe de 410px à 800px pour donner de la place */
+/* --- DESIGN SUR PC --- */
+.home-hero-content {
+    width: min(800px, calc(100% - 48px)) !important; /* Le point a été ajouté ici */
 }
 
 .home-hero h1 {
-    max-width: 100% !important; /* On retire la limite de 390px qui coupait le texte */
-    font-size: 14px; /* Tu peux l'agrandir un poil si tu veux (il était à 13px) */
+    max-width: 100% !important; 
+    font-size: 14px; 
     line-height: 1.6;
+}
+/* ==========================================================================
+   CORRECTION FINALE : TAILLE DU TITRE ET LARGEUR DE LA BANNIÈRE
+   ========================================================================== */
+
+/* 1. On donne enfin de la place au bloc de texte sur grand écran (PC) */
+.home-hero-content {
+    width: min(800px, calc(100% - 48px)) !important;
+}
+
+/* 2. On booste la taille du Drop Été partout */
+.eyebrow, 
+.home-hero-content .eyebrow {
+    font-family: 'Inter', Arial, sans-serif !important;
+    font-size: 24px !important; /* Taille XXL sur PC */
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: block !important;
+    margin-bottom: 14px !important;
+}
+
+/* 3. On ajuste le tout pour que ce soit parfait sur Mobile (téléphone) */
+@media (max-width: 560px) {
+    .eyebrow, 
+    .home-hero-content .eyebrow {
+        font-size: 26px !important; /* Taille adaptée pour écran de téléphone */
+        margin-bottom: 10px !important;
     }
+
+    .home-hero h1 {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        max-width: 100% !important;
+        margin-top: 10px !important;
+    }
+}
