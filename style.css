@@ -772,3 +772,4 @@ home-hero-content {
     max-width: 100% !important; /* On retire la limite de 390px qui coupait le texte */
     font-size: 14px; /* Tu peux l'agrandir un poil si tu veux (il était à 13px) */
     line-height: 1.6;
+    }
