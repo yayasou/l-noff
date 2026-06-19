@@ -717,3 +717,25 @@ textarea {
     color: var(--black);
     border-color: var(--white);
 }
+@media (max-width: 480px) {
+    /* Aligner la recherche et le bouton demande l'un sous l'autre */
+    .header-actions, .search-container { 
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        align-items: center;
+    }
+
+    .search-bar {
+        width: 80% !important; /* Force la barre à prendre une bonne largeur sur mobile */
+    }
+
+    /* Ajuster le menu de navigation pour qu'il soit propre sur deux lignes ou en liste */
+    .nav-links {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Fait une belle grille de 2 colonnes bien alignées */
+        gap: 12px;
+        text-align: center;
+        padding: 0 20px;
+    }
+}
