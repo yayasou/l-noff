@@ -6,8 +6,9 @@
     <title>LÜN — Demande de commande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght=500;600&family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="site-header">
@@ -39,12 +40,13 @@
         </section>
 
         <section class="order-layout">
-            <form class="order-form" id="contact" name="demande-commande-lun" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="demande-commande-lun">
+            <form class="order-form" id="contact" name="demande-commande-lun" action="TON_LIEN_FORMSPREE_ICI" method="POST">
+                
                 <label>Nom complet<input type="text" name="name" required></label>
                 <label>Email<input type="email" name="email" required></label>
                 <label>Instagram ou téléphone<input type="text" name="contact"></label>
                 <label>Ville<input type="text" name="city" required></label>
+                
                 <label>Taille
                     <select name="size" required>
                         <option value="">Sélectionner</option>
@@ -53,8 +55,13 @@
                         <option>L</option>
                     </select>
                 </label>
+                
                 <label>Message<textarea name="message" rows="4" placeholder="Question, livraison, disponibilité..."></textarea></label>
+                
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAADnwKC192mrKKpMO"></div>
+
                 <button type="submit" class="request-btn">Envoyer la demande</button>
+                
                 <p class="form-note">Aucun paiement n'est demandé sur cette page. L'équipe LÜN vous recontacte pour finaliser la commande.</p>
             </form>
 
