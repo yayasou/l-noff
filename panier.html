@@ -40,7 +40,7 @@
         </section>
 
         <section class="order-layout">
-            <form class="order-form" id="contact" name="demande-commande-lun" action="https://formspree.io/f/xkoadovv" method="POST">
+            <form class="order-form" id="contact" name="demande-commande-lun">
                 
                 <label>Nom complet<input type="text" name="name" required></label>
                 <label>Email<input type="email" name="email" required></label>
@@ -58,12 +58,18 @@
                 
                 <label>Message<textarea name="message" rows="4" placeholder="Question, livraison, disponibilité..."></textarea></label>
                 
+                <div style="display: none;">
+                    <label for="website">Ne pas remplir ce champ :</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAADnwKC192mrKKpMO"></div>
 
                 <button type="submit" class="request-btn">Envoyer la demande</button>
                 
                 <p class="form-note">Aucun paiement n'est demandé sur cette page. L'équipe LÜN vous recontacte pour finaliser la commande.</p>
-            </form> <aside class="order-summary" id="infos">
+            </form> 
+            <aside class="order-summary" id="infos">
                 <img src="tshirt.png" alt="T-shirt LÜN Le premier">
                 <h2>Pièce 001 — Le premier</h2>
                 <p>25 €</p>
@@ -86,31 +92,38 @@
     </footer>
 
     <script src="script.js"></script>
-<script>
-document.getElementById('contact').addEventListener('submit', function(e) {
-    e.preventDefault(); // Empêche le rechargement de la page par défaut
-    
-    var form = this;
-    var data = new FormData(form);
-    
-    // Envoie les données à Formspree en arrière-plan
-    fetch(form.action, {
-        method: form.method,
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            // Si l'envoi fonctionne, on redirige vers ta page merci !
-            window.location.href = 'merci.html';
-        } else {
-            alert("Une erreur est survenue, veuillez réessayer.");
-        }
-    }).catch(error => {
-        alert("Une erreur est survenue, veuillez réessayer.");
+    <script>
+    document.getElementById('contact').addEventListener('submit', function(e) {
+        e.preventDefault(); // Bloque la redirection automatique moche
+        
+        var form = this;
+        var formData = new FormData(form);
+        
+        // Convertit les données du formulaire en format JSON lisible par Formspark
+        var data = Object.fromEntries(formData.entries());
+        
+        // Envoie les données en arrière-plan à Formspark
+        // ⚠️ REMPLACE "TON_ID_FORMSPARK" PAR TON VRAI ID DANS L'URL CI-DESSOUS
+        fetch("https://submit-form.com/I6Zups90Q", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirection instantanée sur ta page GitHub Pages !
+                window.location.href = 'merci.html';
+            } else {
+                alert("Une erreur est survenue, veuillez réessayer.");
+            }
+        })
+        .catch(error => {
+            alert("Une erreur de connexion est survenue.");
+        });
     });
-});
-</script>
+    </script>
 </body>
 </html>
