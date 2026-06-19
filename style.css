@@ -210,6 +210,7 @@ textarea {
     transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
+
 .primary-link:hover,
 .request-btn:hover {
     background: var(--black);
@@ -710,4 +711,9 @@ textarea {
     .order-intro h1 {
         font-size: 15px;
     }
+}
+.size-btn.is-selected {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
 }
