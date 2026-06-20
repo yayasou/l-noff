@@ -1,3 +1,6 @@
+/* ==========================================================================
+   1. VARIABLES & CONFIGURATION GÉNÉRALE
+   ========================================================================== */
 :root {
     --black: #000000;
     --white: #ffffff;
@@ -42,6 +45,9 @@ textarea {
     font: inherit;
 }
 
+/* ==========================================================================
+   2. EN-TÊTE (HEADER) & NAVIGATION
+   ========================================================================== */
 .site-header {
     width: 100%;
     padding: 12px 72px 0;
@@ -142,7 +148,7 @@ textarea {
 
 .nav-links a {
     text-align: center;
-    font-family: "Cormorant SC", serif;
+    font-family: "Cormorant SC", serif; /* <-- C'est cette ligne */
     font-size: 14px;
     font-weight: 600;
     transition: color 180ms ease;
@@ -152,6 +158,9 @@ textarea {
     color: var(--muted);
 }
 
+/* ==========================================================================
+   3. PAGES ACCUEIL, DROP & EDITORIAL
+   ========================================================================== */
 .home-hero {
     position: relative;
     width: 100%;
@@ -172,24 +181,27 @@ textarea {
     position: absolute;
     left: 54px;
     top: 50%;
-    width: min(410px, calc(100% - 48px));
+    width: min(800px, calc(100% - 48px)) !important;
     transform: translateY(-50%);
 }
 
-.eyebrow {
+.eyebrow, 
+.home-hero-content .eyebrow {
+    font-family: 'Inter', Arial, sans-serif !important;
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    display: block !important;
+    margin-bottom: 14px !important;
     color: var(--white);
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
 }
 
 .home-hero h1 {
-    max-width: 390px;
+    max-width: 100% !important; 
+    font-size: 14px; 
+    line-height: 1.6;
     margin: 14px 0 18px;
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.7;
     color: rgba(255, 255, 255, 0.88);
 }
 
@@ -209,7 +221,6 @@ textarea {
     text-transform: uppercase;
     transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
-
 
 .primary-link:hover,
 .request-btn:hover {
@@ -308,6 +319,9 @@ textarea {
     text-transform: uppercase;
 }
 
+/* ==========================================================================
+   4. PAGES PRODUIT & ARCHIVES
+   ========================================================================= */
 .product-feature {
     display: grid;
     grid-template-columns: minmax(260px, 0.86fr) minmax(290px, 0.72fr);
@@ -492,6 +506,9 @@ textarea {
     text-transform: uppercase;
 }
 
+/* ==========================================================================
+   5. PAGE PANIER / LE FORMULAIRE DE COMMANDE COMPLETE
+   ========================================================================== */
 .order-layout {
     display: grid;
     grid-template-columns: minmax(280px, 1fr) minmax(240px, 340px);
@@ -524,6 +541,7 @@ textarea {
     color: var(--white);
     padding: 13px 14px;
     outline: none;
+    font-family: inherit; /* Corrige le bug de police sur Mac/iOS */
 }
 
 .order-form input:focus,
@@ -538,6 +556,124 @@ textarea {
     line-height: 1.6;
 }
 
+/* Grille Adresse Postale */
+.address-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 18px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+/* Modes de Livraison */
+.delivery-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 10px 0;
+}
+
+.delivery-title {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.radio-label {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    background: #0f0f0f;
+    padding: 12px 14px;
+    border: 1px solid var(--line-soft);
+    border-radius: 7px;
+    color: var(--white) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+}
+
+.radio-label input[type="radio"] {
+    width: auto !important;
+    margin: 0;
+    cursor: pointer;
+    accent-color: var(--white);
+}
+
+/* Sous-options Transporteurs */
+.sub-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid var(--line-soft);
+}
+
+.sub-radio-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #090909;
+    padding: 14px;
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+}
+
+.carrier-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+}
+
+.carrier-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+}
+
+.carrier-price {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* Éléments Mondial Relay */
+.map-btn {
+    display: inline-block;
+    background: #151515;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    padding: 6px 12px;
+    font-size: 10px;
+    border-radius: 4px;
+    margin: 8px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.map-btn:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+#input-relais {
+    width: 100%;
+    font-size: 11px;
+    padding: 8px 10px;
+    background: #000;
+    border: 1px solid var(--line-soft);
+    border-radius: 5px;
+    color: var(--white);
+    margin-top: 5px;
+}
+
+/* Résumé du Panier */
 .order-summary {
     align-self: start;
     border: 1px solid var(--line-soft);
@@ -557,17 +693,39 @@ textarea {
     text-transform: uppercase;
 }
 
-.order-summary p {
-    margin: 12px 0 18px;
-    font-weight: 700;
-}
-
 .order-summary span {
     color: var(--muted);
     font-size: 12px;
     line-height: 1.7;
 }
 
+.price-breakdown {
+    margin: 20px 0;
+    border-top: 1px solid var(--line-soft);
+    padding-top: 14px;
+    display: grid;
+    gap: 8px;
+}
+
+.price-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.total-line {
+    border-top: 1px solid var(--line-soft);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+/* ==========================================================================
+   6. BAS DE PAGE (FOOTER)
+   ========================================================================== */
 .site-footer {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -610,6 +768,9 @@ textarea {
     justify-self: end;
 }
 
+/* ==========================================================================
+   7. RESPONSIVE DESIGN (MOBILE & TABLETTE)
+   ========================================================================== */
 @media (max-width: 900px) {
     .site-header {
         padding: 12px 24px 0;
@@ -711,49 +872,10 @@ textarea {
     .order-intro h1 {
         font-size: 15px;
     }
-}
-.size-btn.is-selected {
-    background: var(--white);
-    color: var(--black);
-    border-color: var(--white);
-}
 
-/* --- DESIGN SUR PC --- */
-.home-hero-content {
-    width: min(800px, calc(100% - 48px)) !important; /* Le point a été ajouté ici */
-}
-
-.home-hero h1 {
-    max-width: 100% !important; 
-    font-size: 14px; 
-    line-height: 1.6;
-}
-/* ==========================================================================
-   CORRECTION FINALE : TAILLE DU TITRE ET LARGEUR DE LA BANNIÈRE
-   ========================================================================== */
-
-/* 1. On donne enfin de la place au bloc de texte sur grand écran (PC) */
-.home-hero-content {
-    width: min(800px, calc(100% - 48px)) !important;
-}
-
-/* 2. On booste la taille du Drop Été partout */
-.eyebrow, 
-.home-hero-content .eyebrow {
-    font-family: 'Inter', Arial, sans-serif !important;
-    font-size: 24px !important; /* Taille XXL sur PC */
-    font-weight: 800 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.05em !important;
-    display: block !important;
-    margin-bottom: 14px !important;
-}
-
-/* 3. On ajuste le tout pour que ce soit parfait sur Mobile (téléphone) */
-@media (max-width: 560px) {
     .eyebrow, 
     .home-hero-content .eyebrow {
-        font-size: 26px !important; /* Taille adaptée pour écran de téléphone */
+        font-size: 26px !important;
         margin-bottom: 10px !important;
     }
 
@@ -762,5 +884,14 @@ textarea {
         line-height: 1.6 !important;
         max-width: 100% !important;
         margin-top: 10px !important;
+    }
+
+    .address-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .full-width {
+        grid-column: span 1;
     }
 }
