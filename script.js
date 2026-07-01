@@ -1,1 +1,156 @@
-document.addEventListener("DOMContentLoaded",(()=>{"use strict";const e=document.querySelectorAll(".size-btn:not(.out-of-stock)");let t=localStorage.getItem("lun_selected_size")||"";function n(){e.forEach((e=>{e.classList.toggle("is-selected",e.textContent.trim()===t)}))}e.forEach((o=>{o.addEventListener("click",(()=>{t=o.textContent.trim(),localStorage.setItem("lun_selected_size",t),n()}))})),n();const o=document.querySelector(".add-to-cart-btn");o&&o.addEventListener("click",(e=>{t||(e.preventDefault(),alert("Sélectionnez une taille avant de faire une demande."))}));const a=document.querySelector(".order-form");if(a){const e=a.querySelector('select[name="size"]');e&&t&&(e.value=t)}const r=document.getElementById("summary-shipping"),c=document.getElementById("summary-total"),i=document.querySelectorAll('input[name="delivery_method"]'),s=document.getElementById("shipping-sub-options"),l=document.querySelectorAll('input[name="carrier"]');function u(){const e=document.querySelector('input[name="delivery_method"]:checked');if(!e||!r||!c)return;if("retrait_malakoff"===e.value){if(s)s.style.display="none";r.textContent="Gratuit";c.textContent="25,00 €"}else{if(s)s.style.display="flex";const e=document.querySelector('input[name="carrier"]:checked');e&&("mondial_relay"===e.value?(r.textContent="4,50 €",c.textContent="29,50 €"):(r.textContent="6,50 €",c.textContent="31,50 €"))}}i.forEach((e=>{e.addEventListener("change",u)})),l.forEach((e=>{e.addEventListener("change",u)})),u();const d=document.querySelector(".search-custom");d&&d.addEventListener("keydown",(e=>{"Enter"===e.key&&(e=d.value.trim().toLowerCase())&&(e=[{keywords:["tee","t-shirt","shirt","premier","2026","summer","ete","été","drop"],url:"nouveautes.html#collection"},{keywords:["archive","archives","automne","hiver","beta","bêta"],url:"archives.html"},{keywords:["commande","demande","contact","mail","email"],url:"panier.html#contact"}].find((t=>t.keywords.some((t=>e.includes(t))))),window.location.href=e?e.url:"nouveautes.html")}))})),document.getElementById("contact").addEventListener("submit",(function(e){e.preventDefault();var t=new FormData(this),t=Object.fromEntries(t.entries());fetch("https://submit-form.com/I6Zups90Q",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(t)}).then((e=>{e.ok?window.location.href="merci.html":alert("Une erreur est survenue, veuillez réessayer.")})).catch((e=>{alert("Une erreur de connexion est survenue.")}))}));
+document.addEventListener("DOMContentLoaded", () => {
+    // ==========================================
+    // 1. GESTION DES TAILLES ET DU PANIER
+    // ==========================================
+    const sizeButtons = document.querySelectorAll(".size-btn:not(.out-of-stock)");
+    let selectedSize = localStorage.getItem("lun_selected_size") || "";
+
+    function updateSizeUI() {
+        sizeButtons.forEach(btn => {
+            btn.classList.toggle("is-selected", btn.textContent.trim() === selectedSize);
+        });
+    }
+
+    sizeButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            selectedSize = btn.textContent.trim();
+            localStorage.setItem("lun_selected_size", selectedSize);
+            updateSizeUI();
+            const formSelect = document.querySelector('.order-form select[name="size"]');
+            if (formSelect) formSelect.value = selectedSize;
+        });
+    });
+
+    updateSizeUI();
+
+    const addToCartBtn = document.querySelector(".add-to-cart-btn");
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener("click", (e) => {
+            if (!selectedSize) {
+                e.preventDefault();
+                alert("Sélectionnez une taille avant de faire une demande.");
+            }
+        });
+    }
+
+    // ==========================================
+    // 2. ANIMATION DU HEADER AU SCROLL
+    // ==========================================
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('.site-header');
+        if (header) {
+            if (window.scrollY > 30) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // ==========================================
+    // 3. GALERIE SANS BUG (MANUELLE + AUTO)
+    // ==========================================
+    const thumbnails = document.querySelectorAll('.thumb-btn');
+    const mainImage = document.querySelector('.main-product-image');
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function changeSlide(index) {
+    if (!thumbnails[index] || !mainImage) return;
+
+    currentIndex = index;
+
+    thumbnails.forEach(t => t.classList.remove('is-active'));
+    thumbnails[currentIndex].classList.add('is-active');
+
+    const newSrc = thumbnails[currentIndex].getAttribute('data-src');
+
+    // FADE OUT
+    mainImage.classList.add("is-fading");
+
+    setTimeout(() => {
+        mainImage.src = newSrc;
+
+        // FADE IN
+        mainImage.classList.remove("is-fading");
+    }, 300);
+}
+
+    function startAutoSlide() {
+        autoSlideInterval = setInterval(() => {
+            let nextIndex = (currentIndex + 1) % thumbnails.length;
+            changeSlide(nextIndex);
+        }, 4000);
+    }
+
+    function stopAutoSlide() {
+        clearInterval(autoSlideInterval);
+    }
+
+    // Clic manuel
+    thumbnails.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => {
+            stopAutoSlide();
+            changeSlide(index);
+            startAutoSlide();
+        });
+    });
+
+    // Lancement automatique si les éléments existent
+    if (thumbnails.length > 0 && mainImage) {
+        startAutoSlide();
+    }
+});
+// ==========================================
+// 4. MISE À JOUR DES FRAIS DE PORT + TOTAL
+// ==========================================
+
+const shippingDisplay = document.getElementById("summary-shipping");
+const totalDisplay = document.getElementById("summary-total");
+const shippingSubOptions = document.getElementById("shipping-sub-options");
+
+const basePrice = 25;
+
+// Prix transport
+const shippingPrices = {
+    mondial_relay: 4.50,
+    colissimo: 6.50,
+    retrait_malakoff: 0
+};
+
+function updateTotal() {
+    const deliveryMethod = document.querySelector('input[name="delivery_method"]:checked').value;
+    let shipping = 0;
+
+    if (deliveryMethod === "livraison") {
+        // Si c'est une livraison, on affiche les sous-options et on prend le prix du transporteur sélectionné
+        if (shippingSubOptions) shippingSubOptions.style.display = "flex";
+        
+        const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
+        if (selectedCarrier) {
+            shipping = shippingPrices[selectedCarrier.value] || 0;
+        }
+    } else {
+        // Si c'est un retrait à Malakoff, on cache les sous-options et les frais de port tombent à 0
+        if (shippingSubOptions) shippingSubOptions.style.display = "none";
+        shipping = shippingPrices["retrait_malakoff"];
+    }
+
+    // Mise à jour de l'affichage textuel
+    if (shippingDisplay) {
+        shippingDisplay.textContent = shipping === 0 ? "Gratuit" : shipping.toFixed(2) + " €";
+    }
+
+    if (totalDisplay) {
+        const total = basePrice + shipping;
+        totalDisplay.textContent = total.toFixed(2) + " €";
+    }
+}
+
+// Écoute des changements sur TOUS les boutons radio du bloc de livraison
+document.querySelectorAll('input[name="carrier"], input[name="delivery_method"]').forEach(input => {
+    input.addEventListener("change", updateTotal);
+});
+
+// Initialisation au chargement de la page
+updateTotal();

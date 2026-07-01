@@ -6,31 +6,33 @@
     <title>LÜN — Demande de commande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght=500;600&family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="style2.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="site-header">
-        <div class="header-main">
-            <div class="header-spacer"></div>
-            <a href="index.html" class="brand" aria-label="Accueil LÜN">
-                <img src="logo.png" alt="LÜN">
-            </a>
-            <div class="header-tools">
-                <label class="search-shell">
-                    <input type="search" class="search-custom" placeholder="Recherche un produit" aria-label="Recherche un produit">
-                </label>
-                <a href="panier.html" class="header-order-link">Demande</a>
-            </div>
+    <div class="header-main">
+        <div class="header-spacer"></div>
+        <a href="index.html" class="brand" aria-label="Accueil LÜN">
+            <img src="logo.png" alt="LÜN">
+        </a>
+        <div class="header-tools">
+            <label class="search-shell">
+                <input type="search" class="search-custom" placeholder="Recherche un produit" aria-label="Recherche un produit">
+            </label>
+            <a href="panier.html" class="header-order-link">Demande</a>
         </div>
-        <nav class="nav-links" aria-label="Navigation principale">
-            <a href="nouveautes.html">Nouveautés</a>
-            <a href="nouveautes.html#collection">Collections</a>
-            <a href="nouveautes.html">Dernier Drop</a>
-            <a href="archives.html">Archives</a>
-        </nav>
-    </header>
+    </div>
+    <nav class="nav-links" aria-label="Navigation principale">
+        <a href="nouveautes.html">Nouveautés</a>
+        <a href="nouveautes.html#collection">Collections</a>
+        <a href="nouveautes.html">Dernier Drop</a>
+        <a href="archives.html">Archives</a>
+    </nav>
+</header>
 
     <main class="order-page">
         <section class="order-intro">
@@ -115,7 +117,7 @@
             </form> 
 
             <aside class="order-summary" id="infos">
-                <img src="tshirt.png" alt="T-shirt LÜN Le premier">
+                <img src="tshirt-face.PNG" alt="T-shirt LÜN Le premier">
                 <h2>Pièce 001 — Le premier</h2>
                 
                 <div class="price-breakdown">
@@ -124,7 +126,8 @@
                     <div class="price-line total-line"><span>Total estimé :</span> <span id="summary-total">29,50 €</span></div>
                 </div>
 
-                <span>Livraison en France. Retours et échanges selon disponibilité. Contact : contact@lun-off.com</span>
+                <span>Livraison en France. Retours et échanges selon disponibilité.</span>
+                <span>Contact : contact@lun-off.com</span>
             </aside>
         </section>
     </main>
@@ -142,6 +145,6 @@
         <p class="footer-copy">© 2026 LÜN OFF</p>
     </footer>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
