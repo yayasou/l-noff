@@ -821,6 +821,30 @@ section, .section {
     color: #555;
     margin-bottom: 14px;
 }
+/* Forcer le panneau d'infos à s'aligner en haut et ne pas descendre */
+.product-info-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-self: start; /* Empêche le bloc de s'étirer ou de tomber en bas */
+}
+
+/* Assurer que la grille principale contienne bien les deux blocs côte à côte */
+.product-single-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Image à gauche, infos à droite */
+    gap: 80px;
+    align-items: start; /* Aligne les sommets de l'image et du texte */
+}
+
+/* Ajustement responsive pour mobile (les infos passent en dessous naturellement) */
+@media (max-width: 768px) {
+    .product-single-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
 
 /* ==========================================================
    ALIGNEMENT ET VISIBILITÉ DES MINIATURES
