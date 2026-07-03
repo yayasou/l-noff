@@ -18,24 +18,17 @@ const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    // Récupération du panier depuis le localStorage
     const cart = JSON.parse(localStorage.getItem("lun_cart"));
-
-    // Si le panier est vide, on s'arrête là
     if (!cart) return;
 
     const basePrice = cart.price;
     const userSelectedSize = cart.size ? cart.size.trim() : "";
 
-    // ----------------------------------------------------
-    // CORRECTION ÉTAPE 4 : Sélection automatique de la taille dans le formulaire HTML
-    // ----------------------------------------------------
     const sizeSelect = document.querySelector('select[name="size"]');
     if (sizeSelect && userSelectedSize) {
         sizeSelect.value = userSelectedSize;
     }
 
-    // Grill tarifaire des transporteurs
     const shippingPrices = {
         mondial_relay: 4.50,
         colissimo: 6.50,
@@ -44,12 +37,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const shippingDisplay = document.getElementById("summary-shipping");
     const totalDisplay = document.getElementById("summary-total");
-    const orderForm = document.querySelector(".order-form"); 
+    const orderForm = document.querySelector(".order-form");
     const submitButton = document.querySelector(".order-form button[type='submit']");
 
-    // ==========================================
-    // VERIFICATION DU STOCK DE LA TAILLE DU PANIER
-    // ==========================================
+    // STOCK CHECK
     if (userSelectedSize) {
         try {
             const productRef = doc(db, "products", "thI3NU9kSkaT22ZSc84m");
@@ -57,45 +48,40 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (productSnap.exists()) {
                 const stockData = productSnap.data().stock;
-                const realStockLeft = stockData[userSelectedSize] !== undefined ? stockData[userSelectedSize] : 0;
+                const realStockLeft = stockData[userSelectedSize] ?? 0;
 
                 if (realStockLeft <= 0) {
-                    alert(`Désolé, la taille ${userSelectedSize} vient tout juste de tomber en rupture de stock.`);
-                    
+                    alert(`Désolé, taille ${userSelectedSize} indisponible.`);
+
                     if (submitButton) {
-                        submitButton.textContent = `Taille ${userSelectedSize} épuisée`;
+                        submitButton.textContent = "Épuisé";
                         submitButton.disabled = true;
-                        submitButton.style.opacity = "0.5";
-                        submitButton.style.pointerEvents = "none";
                     }
                 }
             }
-        } catch (error) {
-            console.error("Erreur de vérification des stocks dans le panier :", error);
+        } catch (e) {
+            console.error(e);
         }
     }
 
-    // ==========================================
-    // CALCUL DYNAMIQUE DES FRAIS DE PORT ET DU TOTAL
-    // ==========================================
     function updateTotal() {
         const deliveryMethodEl = document.querySelector('input[name="delivery_method"]:checked');
         if (!deliveryMethodEl) return;
 
         const deliveryMethod = deliveryMethodEl.value;
-        const shippingSubOptions = document.getElementById("shipping-sub-options"); 
+        const shippingSubOptions = document.getElementById("shipping-sub-options");
+
         let shipping = 0;
 
         if (deliveryMethod === "livraison") {
             if (shippingSubOptions) shippingSubOptions.style.display = "flex";
-            
+
             const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
             if (selectedCarrier) {
                 shipping = shippingPrices[selectedCarrier.value] || 0;
             }
         } else {
             if (shippingSubOptions) shippingSubOptions.style.display = "none";
-            shipping = shippingPrices["retrait_malakoff"];
         }
 
         if (shippingDisplay) {
@@ -103,73 +89,92 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         if (totalDisplay) {
-            const total = basePrice + shipping;
-            totalDisplay.textContent = total.toFixed(2) + " €";
+            totalDisplay.textContent = (basePrice + shipping).toFixed(2) + " €";
         }
     }
 
-    document.querySelectorAll('input[name="carrier"], input[name="delivery_method"]').forEach(input => {
-        input.addEventListener("change", updateTotal);
-    });
+    document.querySelectorAll('input[name="carrier"], input[name="delivery_method"]')
+        .forEach(i => i.addEventListener("change", updateTotal));
 
-    // ==========================================
-    // SOUMISSION SECURISEE ET DESCENTE DES STOCKS
-    // ==========================================
+    updateTotal();
+
+    // SUBMIT
     if (orderForm) {
+
         orderForm.addEventListener("submit", async (e) => {
-            e.preventDefault(); 
+            e.preventDefault();
 
-            // On récupère la taille finale choisie dans le formulaire au cas où l'utilisateur l'a changée
-            const finalSize = sizeSelect ? sizeSelect.value : userSelectedSize;
+            const btn = submitButton;
+            if (!btn || btn.disabled) return;
 
-            if (!finalSize) {
-                alert("Erreur : Aucune taille sélectionnée.");
+            btn.disabled = true;
+            btn.textContent = "Traitement...";
+
+            const method = document.querySelector('input[name="delivery_method"]:checked')?.value;
+            const carrier = document.querySelector('input[name="carrier"]:checked');
+            const relayInput = document.getElementById("input-relais");
+
+            // RELAIS OBLIGATOIRE
+            if (
+                method === "livraison" &&
+                carrier?.value === "mondial_relay" &&
+                relayInput.value.trim() === ""
+            ) {
+                alert("Merci de renseigner votre Point Relais");
+
+                btn.disabled = false;
+                btn.textContent = "Envoyer la demande";
+                relayInput.focus();
                 return;
             }
 
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = "Traitement en cours...";
-            }
-
             try {
-                const productRef = doc(db, "products", "thI3NU9kSkaT22ZSc84m");
-                const productSnap = await getDoc(productRef);
 
-                if (productSnap.exists()) {
-                    const stockData = productSnap.data().stock;
-                    const realStockLeft = stockData[finalSize] !== undefined ? stockData[finalSize] : 0;
+                const shipping =
+                    method === "livraison"
+                        ? (shippingPrices[carrier?.value] || 0)
+                        : 0;
 
-                    if (realStockLeft <= 0) {
-                        alert("Action impossible : Ce vêtement n'est plus disponible dans cette taille.");
-                        if (submitButton) {
-                            submitButton.textContent = `Taille ${finalSize} épuisée`;
-                        }
+                const prixHidden = document.getElementById("prix-hidden");
+                const shippingHidden = document.getElementById("shipping-hidden");
+                const totalHidden = document.getElementById("total-hidden");
+                const carrierHidden = document.getElementById("carrier-hidden");
+
+                if (prixHidden) prixHidden.value = basePrice;
+                if (shippingHidden) shippingHidden.value = shipping;
+                if (totalHidden) totalHidden.value = basePrice + shipping;
+                if (carrierHidden) carrierHidden.value = carrier?.value || "";
+
+                const ref = doc(db, "products", "thI3NU9kSkaT22ZSc84m");
+                const snap = await getDoc(ref);
+
+                if (snap.exists()) {
+                    const stock = snap.data().stock;
+                    const size = document.querySelector('select[name="size"]').value;
+
+                    if (!stock || stock[size] <= 0) {
+                        alert("Produit indisponible");
+
+                        btn.disabled = false;
+                        btn.textContent = "Envoyer la demande";
                         return;
                     }
 
-                    const newStockValue = realStockLeft - 1;
-
-                    await updateDoc(productRef, {
-                        [`stock.${finalSize}`]: newStockValue
+                    await updateDoc(ref, {
+                        [`stock.${size}`]: stock[size] - 1
                     });
-
-                    orderForm.submit();
-
-                } else {
-                    alert("Erreur : Produit introuvable.");
-                    if (submitButton) submitButton.disabled = false;
                 }
+
+                orderForm.requestSubmit();
+
             } catch (err) {
-                console.error("Erreur lors de la mise à jour du stock :", err);
-                alert("Une erreur est survenue, veuillez réessayer.");
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = "Faire une demande";
-                }
+                console.error(err);
+
+                alert("Erreur");
+
+                btn.disabled = false;
+                btn.textContent = "Envoyer la demande";
             }
         });
     }
-
-    updateTotal();
 });
