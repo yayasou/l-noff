@@ -1137,23 +1137,131 @@ section, .section {
     margin-top: 10px;
 }
 
-/* RESPONSIVE */
+/* ==========================================================
+   CORRECTIFS RESPONSIVE MOBILES & TABLETTES (LÜN DESIGN)
+========================================================== */
+
 @media (max-width: 900px) {
+    /* Grilles globales */
+    .editorial-grid, .product-feature { 
+        grid-template-columns: 1fr; 
+        gap: 40px; 
+        margin: 60px auto;
+    }
+    .editorial-grid article:nth-child(2) { margin-top: 0; }
+    .product-media { position: relative; top: auto; }
+    
+    /* Footer */
+    .site-footer { 
+        grid-template-columns: 1fr; 
+        justify-items: center; 
+        gap: 24px; 
+        text-align: center; 
+        margin-top: 100px;
+    }
+    .footer-copy { justify-self: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+}
+
+@media (max-width: 768px) {
+    /* --- 1. Sécurité globale contre le débordement horizontal --- */
+    .container, 
+    .header-main, 
+    .nav-links, 
+    .home-hero-content, 
+    .editorial-grid, 
+    .product-feature, 
+    .drop-page, 
+    .order-page, 
+    .archives-page, 
+    .thankyou-wrapper, 
+    .site-footer {
+        width: calc(100% - 32px) !important; /* Marge de 16px de chaque côté sur mobile */
+    }
+
+    /* --- 2. Header & Navigation mobile --- */
+    .header-main {
+        height: auto;
+        padding-block: 16px;
+        grid-template-columns: 1fr auto; /* On vire la colonne vide inutile */
+        gap: 16px;
+    }
+    
+    .brand {
+        grid-column: 1;
+        justify-content: flex-start;
+    }
+    
+    .header-tools {
+        grid-column: 2;
+        gap: 10px;
+    }
+    
+    /* Cache ou réduit la barre de recherche sur mobile pour éviter que ça squeeze */
+    .search-shell {
+        width: 120px; 
+        padding: 0 10px;
+    }
+    .search-shell input { font-size: 11px; }
+
+    /* Le menu de liens s'enroule proprement au lieu de casser l'écran */
+    .nav-links {
+        height: auto;
+        padding-bottom: 16px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    /* --- 3. Hero & Typographies --- */
+    .home-hero {
+        height: 60vh;
+        min-height: 400px;
+    }
+    .home-hero-content {
+        padding-bottom: 40px;
+    }
+    
+    /* --- 4. Page Produit Spécifique (`nouveautes.html`) --- */
+    /* Forcer le conteneur flex inline du HTML à passer en colonne */
+    .drop-page .product-feature {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 32px !important;
+        padding: 0 !important;
+    }
+    
+    .product-left, .product-right {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+    
+    .product-panel h2, .product-right h2 {
+        font-size: 28px;
+    }
+    
+    .product-thumbnails {
+        justify-content: var(--thumb-align, flex-start);
+        overflow-x: auto; /* Permet de scroller les miniatures si besoin */
+        padding-bottom: 8px;
+    }
+
+    /* --- 5. Formulaire de Commande --- */
     .order-layout {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
-
-    .order-summary {
-        position: relative;
-        top: auto;
-    }
-
     .address-grid {
         grid-template-columns: 1fr;
     }
-
     .address-grid .full-width {
         grid-column: span 1;
+    }
+    .sub-options {
+        margin-left: 0;
     }
 }
 /* ==========================================================
