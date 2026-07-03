@@ -6,33 +6,31 @@
     <title>LÜN — Demande de commande</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght=500;600&family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
-       <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght=500;600&family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
     <header class="site-header">
-    <div class="header-main">
-        <div class="header-spacer"></div>
-        <a href="index.html" class="brand" aria-label="Accueil LÜN">
-            <img src="logo.png" alt="LÜN">
-        </a>
-        <div class="header-tools">
-            <label class="search-shell">
-                <input type="search" class="search-custom" placeholder="Recherche un produit" aria-label="Recherche un produit">
-            </label>
-            <a href="panier.html" class="header-order-link">Demande</a>
+        <div class="header-main">
+            <div class="header-spacer"></div>
+            <a href="index.html" class="brand" aria-label="Accueil LÜN">
+                <img src="logo.png" alt="LÜN">
+            </a>
+            <div class="header-tools">
+                <label class="search-shell">
+                    <input type="search" class="search-custom" placeholder="Recherche un produit" aria-label="Recherche un produit">
+                </label>
+                <a href="panier.html" class="header-order-link">Demande</a>
+            </div>
         </div>
-    </div>
-    <nav class="nav-links" aria-label="Navigation principale">
-        <a href="nouveautes.html">Nouveautés</a>
-        <a href="nouveautes.html#collection">Collections</a>
-        <a href="nouveautes.html">Dernier Drop</a>
-        <a href="archives.html">Archives</a>
-    </nav>
-</header>
+        <nav class="nav-links" aria-label="Navigation principale">
+            <a href="nouveautes.html">Nouveautés</a>
+            <a href="nouveautes.html#collection">Collections</a>
+            <a href="nouveautes.html">Dernier Drop</a>
+            <a href="archives.html">Archives</a>
+        </nav>
+    </header>
 
     <main class="order-page">
         <section class="order-intro">
@@ -42,11 +40,10 @@
         </section>
 
         <section class="order-layout">
-            <form class="order-form" id="contact" name="demande-commande-lun" action="https://submit-form.com/I6Zups90Q" method="POST"></form>
-            <input type="hidden" name="_redirect" value="merci.html" />
-
-    <label>Nom complet<input type="text" name="name" required></label>
+            <form class="order-form" id="contact" name="demande-commande-lun" action="https://submit-form.com/I6Zups90Q" method="POST">
                 
+                <input type="hidden" name="_redirect" value="merci.html" />
+
                 <label>Nom complet<input type="text" name="name" required></label>
                 <label>Email<input type="email" name="email" required></label>
                 <label>Instagram ou téléphone<input type="text" name="contact"></label>
@@ -147,6 +144,7 @@
         </div>
         <p class="footer-copy">© 2026 LÜN OFF</p>
     </footer>
-<script type="module" src="script-cart.js"></script>
+
+    <script type="module" src="script-cart.js"></script>
 </body>
 </html>
