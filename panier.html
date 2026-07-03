@@ -40,80 +40,104 @@
         </section>
 
         <section class="order-layout">
-            <form class="order-form" id="contact" name="demande-commande-lun" action="https://submit-form.com/I6Zups90Q" method="POST">
-                
-                <input type="hidden" name="_redirect" value="https://yayasou.github.io/l-noff/merci.html" />
-                <label>Nom complet<input type="text" name="name" required></label>
-                <label>Email<input type="email" name="email" required></label>
-                <label>Instagram ou téléphone<input type="text" name="contact"></label>
-                
-                <div class="address-grid">
-                    <label class="full-width">Adresse postale<input type="text" name="address" placeholder="N° et nom de rue" required></label>
-                    <label class="full-width">Complément d'adresse (Optionnel)<input type="text" name="address_2" placeholder="Appartement, bâtiment, étage..."></label>
-                    <label>Code Postal<input type="text" name="zipcode" pattern="[0-9]{5}" placeholder="Ex: 92240" required></label>
-                    <label>Ville<input type="text" name="city" placeholder="Ex: Malakoff" required></label>
+            
+             <form class="order-form" id="contact" name="demande-commande-lun" novalidate action="https://submit-form.com/I6Zups90Q" method="POST">
+<input type="hidden" name="_redirect" value="https://yayasou.github.io/l-noff/merci.html">
+    <label>Nom complet<input type="text" name="name" required></label>
+    <label>Email<input type="email" name="email" required></label>
+    <label>Instagram ou téléphone<input type="text" name="contact"></label>
+    
+    <div class="address-grid">
+        <label class="full-width">Adresse postale
+            <input type="text" name="address" placeholder="N° et nom de rue" required>
+        </label>
+
+        <label class="full-width">Complément d'adresse (Optionnel)
+            <input type="text" name="address_2" placeholder="Appartement, bâtiment, étage...">
+        </label>
+
+        <label>Code Postal
+            <input type="text" name="zipcode" pattern="[0-9]{5}" placeholder="Ex: 92240" required>
+        </label>
+
+        <label>Ville
+            <input type="text" name="city" placeholder="Ex: Malakoff" required>
+        </label>
+    </div>
+
+    <label>Taille
+        <select name="size" required>
+            <option value="">Sélectionner</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+        </select>
+    </label>
+
+    <div class="delivery-options">
+        <span class="delivery-title">Mode de réception</span>
+
+        <label class="radio-label">
+            <input type="radio" name="delivery_method" value="livraison" checked>
+            <span>Livraison</span>
+        </label>
+
+        <div id="shipping-sub-options" class="sub-options">
+
+            <label class="sub-radio-label">
+                <input type="radio" name="carrier" value="mondial_relay" checked>
+
+                <div class="carrier-info">
+                    <span class="carrier-name">Mondial Relay — Point Relais</span>
+                    <span class="carrier-price">4,50 €</span>
+
+                    <a href="https://www.mondialrelay.fr/trouver-le-point-relais-le-plus-proche-de-chez-moi/" target="_blank" class="map-btn">
+                        Trouver mon Point Relais
+                    </a>
+
+                    <input type="text" name="point_relais_choisi" id="input-relais" required placeholder="Colle ici le point relais">
                 </div>
+            </label>
 
-                <label>Taille
-                    <select name="size" required>
-                        <option value="">Sélectionner</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                    </select>
-                </label>
-
-                <div class="delivery-options">
-                    <span class="delivery-title">Mode de réception</span>
-                    
-                    <label class="radio-label">
-                        <input type="radio" name="delivery_method" value="livraison" checked>
-                        <span>Livraison</span>
-                    </label>
-
-                    <div id="shipping-sub-options" class="sub-options">
-                        <label class="sub-radio-label">
-                            <input type="radio" name="carrier" value="mondial_relay" checked>
-                            <div class="carrier-info">
-                                <span class="carrier-name">Mondial Relay — Point Relais</span>
-                                <span class="carrier-price">4,50 €</span>
-                                
-                                <a href="https://www.mondialrelay.fr/trouver-le-point-relais-le-plus-proche-de-chez-moi/" target="_blank" class="map-btn">
-                                    Trouver mon Point Relais
-                                </a>
-                                
-                                <input type="text" name="point_relais_choisi" id="input-relais" placeholder="Colle ici le nom ou l'adresse du point choisi">
-                            </div>
-                        </label>
-                        
-                        <label class="sub-radio-label">
-                            <input type="radio" name="carrier" value="colissimo">
-                            <div class="carrier-info">
-                                <span class="carrier-name">Colissimo — Domicile</span>
-                                <span class="carrier-price">6,50 €</span>
-                            </div>
-                        </label>
-                    </div>
-
-                    <label class="radio-label">
-                        <input type="radio" name="delivery_method" value="retrait_malakoff">
-                        <span>Retrait en main propre à Malakoff (Gratuit)</span>
-                    </label>
+            <label class="sub-radio-label">
+                <input type="radio" name="carrier" value="colissimo">
+                <div class="carrier-info">
+                    <span class="carrier-name">Colissimo — Domicile</span>
+                    <span class="carrier-price">6,50 €</span>
                 </div>
-                
-                <label>Message<textarea name="message" rows="4" placeholder="Question, choix du Point Relais, disponibilité..."></textarea></label>
-                
-                <div style="display: none;">
-                    <label for="website">Ne pas remplir ce champ :</label>
-                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
-                </div>
+            </label>
 
-                <div class="cf-turnstile" data-sitekey="0x4AAAAAADnwKC192mrKKpMO"></div>
+        </div>
 
-                <button type="submit" class="request-btn">Envoyer la demande</button>
-                
-                <p class="form-note">Aucun paiement n'est demandé sur cette page. L'équipe LÜN vous recontacte pour finaliser la commande.</p>
-            </form> 
+        <label class="radio-label">
+            <input type="radio" name="delivery_method" value="retrait_malakoff">
+            <span>Retrait en main propre à Malakoff (Gratuit)</span>
+        </label>
+    </div>
+
+    <label>Message
+        <textarea name="message" rows="4"></textarea>
+    </label>
+
+    <div style="display:none;">
+        <input type="text" name="website">
+    </div>
+
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADnwKC192mrKKpMO"></div>
+
+    <!-- hidden fields -->
+    <input type="hidden" name="prix" id="prix-hidden">
+    <input type="hidden" name="shipping" id="shipping-hidden">
+    <input type="hidden" name="total" id="total-hidden">
+    <input type="hidden" name="carrier_selected" id="carrier-hidden">
+
+    <button type="submit" class="request-btn">Envoyer la demande</button>
+
+    <p class="form-note">
+        Aucun paiement n'est demandé sur cette page.
+    </p>
+
+</form>
 
             <aside class="order-summary" id="infos">
                 <img src="tshirt-face.PNG" alt="T-shirt LÜN Le premier">
