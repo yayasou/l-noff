@@ -3,95 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LÜN — Summer Drop</title>
+    <title>Lün - Summer Drop</title>
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style2.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,100..900;1,100..900&family=Bigshot+One&family=Cormorant+SC:wght@300;400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-<header class="site-header">
-    <div class="header-main">
-        <div></div>
 
-        <a href="index.html" class="brand" aria-label="Accueil LÜN">
-            <img src="logo.png" alt="LÜN">
-        </a>
-
-        <div class="header-tools">
-            <div class="search-shell">
-                <input type="text" placeholder="Rechercher...">
-            </div>
-            <a href="panier.html" class="header-order-link">Demande</a>
+<div class="top-bar-container">
+    <div class="top-bar">
+        <div class="empty-space"></div> 
+        
+        <div class="logo">
+            <img src="logo.png" alt="LÜN Logo">
+        </div>
+        
+        <div class="nav-icons">
+            <input type="text" placeholder="Recherche un produit..." class="search-custom">
+            <img src="favori.svg" alt="Favoris" class="icon-custom">
+            <a href="panier.html"><img src="panier.svg" alt="Panier" class="icon-custom"></a>
         </div>
     </div>
+</div>
 
-    <nav class="nav-links" aria-label="Navigation principale">
+<nav class="nav-links-container">
+    <div class="nav-links">
         <a href="nouveautes.html">Nouveautés</a>
-        <a href="nouveautes.html#collection">Collections</a>
-        <a href="nouveautes.html">Dernier Drop</a>
-        <a href="archives.html">Archives</a>
-    </nav>
-</header>
+        <a href="#">Collections</a>
+        <a href="nouveautes.html">Dernier Drop</a> <a href="#">Archives</a>
+    </div>
+</nav>
 
-<main>
-    <section class="home-hero section">
-        <img src="banner.jpg" alt="LÜN Summer Drop en milieu urbain">
-
-        <div class="home-hero-content">
-            <p class="eyebrow">Drop été 2026</p>
-            <h1>Le vêtement suit le rythme, pas la tendance</h1>
-            <a href="nouveautes.html" class="primary-link">Découvrir</a>
-        </div>
-    </section>
-
-    <section>
-        <div class="editorial-grid">
-            <article class="editorial-tile">
-                <div class="tile-bg">
-                    <img src="couronne-parisienne.jpeg" alt="Couronne parisienne">
-                </div>
-                <div class="tile-content">
-                    <h2 class="tile-title">Couronne parisienne</h2>
-                    <p class="tile-desc">Des vêtements pensés pour les rythmes urbains, les trajets et les espaces ouverts.</p>
-                    <a href="nouveautes.html#collection" class="tile-btn">Explorer</a>
-                </div>
-            </article>
-
-            <article class="editorial-tile">
-                <div class="tile-bg">
-                    <img src="objet-durable.JPG" alt="Objet durable">
-                </div>
-                <div class="tile-content">
-                    <h2 class="tile-title">Objet durable</h2>
-                    <p class="tile-desc">Coupes amples, matières denses, détails sobres. Une pièce pensée pour rester.</p>
-                    <a href="nouveautes.html#collection" class="tile-btn">Découvrir</a>
-                </div>
-            </article>
-        </div>
-    </section>
-</main>
-
+<section class="hero-banner">
+    <div class="hero-content">
+        <h1>DROP ÉTÉ 2026</h1>
+        <p>Un design épuré conçu pour le mouvement et le rythme de l'été.</p>
+        <a href="nouveautes.html" class="hero-btn">Découvrir maintenant</a>
+    </div>
+</section>
 <footer class="site-footer">
     <div class="footer-socials">
-        <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer" aria-label="TikTok LÜN">
-            <img src="tiktok bouton.svg" alt="">
+        <a href="#" target="_blank">
+            <img src="tiktok%20bouton.svg" alt="TikTok" class="footer-icon">
         </a>
-        <a href="https://www.instagram.com/lunofc01/" target="_blank" rel="noreferrer" aria-label="Instagram LÜN">
-            <img src="instagram bouton.svg" alt="">
+        <a href="#" target="_blank">
+            <img src="instagram%20bouton.svg" alt="Instagram" class="footer-icon">
         </a>
     </div>
 
     <div class="footer-links">
-        <a href="panier.html#infos">Mentions légales</a>
-        <a href="panier.html#infos">CGV</a>
-        <a href="panier.html#contact">Contact</a>
+        <a href="#">Mentions Légales</a>
+        <span class="separator">|</span>
+        <a href="#">CGV</a>
+        <span class="separator">|</span>
+        <a href="#">Contact</a>
     </div>
 
-    <p class="footer-copy">© 2026 LÜN OFF</p>
+    <div class="footer-copyright">
+        <p>© 2026 LÜN OFF</p>
+    </div>
 </footer>
-
 <script src="script.js"></script>
 </body>
 </html>
