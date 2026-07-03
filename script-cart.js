@@ -102,10 +102,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (orderForm) {
 
         orderForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
+    // 1. AJOUTE ÇA TOUT EN HAUT DU SUBMIT :
+    if (!orderForm.checkValidity()) {
+        // Si le HTML dit qu'il manque un champ, on laisse le comportement normal du navigateur afficher les alertes
+        return; 
+    }
 
-            const btn = submitButton;
-            if (!btn || btn.disabled) return;
+    // On bloque l'envoi classique seulement si le formulaire est valide, pour pouvoir faire le traitement Firebase
+    e.preventDefault();
+
+    const btn = submitButton;
+    if (!btn || btn.disabled) return;
+    
+    // ... tout le reste de ton code Firebase actuel ...
 
             btn.disabled = true;
             btn.textContent = "Traitement...";
@@ -165,9 +174,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     });
                 }
 
-                orderForm.requestSubmit();
+                orderForm.submit(); 
 
-            } catch (err) {
+        } catch (err) {
                 console.error(err);
 
                 alert("Erreur");
