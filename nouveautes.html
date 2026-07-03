@@ -47,15 +47,14 @@
             <p>03 / Drop été 2026 — bientôt disponible</p>
         </section>
 
-        <section class="product-feature">
-            <div class="product-media">
-                <span>4 photos</span>
-                
+        <section class="product-feature" style="display: flex; gap: 40px; align-items: flex-start; max-width: 1200px; margin: 0 auto; padding: 20px;">
+            
+            <div class="product-left" style="flex: 1; min-width: 300px;">
                 <div class="product-image-stage">
-                    <img src="tshirt-face.PNG" alt="T-shirt LÜN blanc face" class="product-img main-product-image is-active">
+                    <img src="tshirt-face.PNG" alt="T-shirt LÜN blanc face" class="product-img main-product-image is-active" style="width: 100%; height: auto;">
                 </div>
 
-                <div class="product-thumbnails">
+                <div class="product-thumbnails" style="display: flex; gap: 10px; margin-top: 15px;">
                     <button class="thumb-btn is-active" data-src="tshirt-face.PNG">
                         <img src="tshirt-face.PNG" alt="Miniature Face">
                     </button>
@@ -69,30 +68,35 @@
                         <img src="tshirt-zoom.JPG" alt="Miniature Zoom">
                     </button>
                 </div>
-            </div> </div> <div class="product-panel">
+            </div>
+
+            <div class="product-right" style="flex: 1; min-width: 300px;">
                 <p class="eyebrow">Pièce 001</p>
                 <h2>Le premier</h2>
                 <p class="product-lead">T-shirt unisexe à coupe ample. Coton dense, tombé droit, marquage discret. Pensé pour l'été urbain.</p>
-                <p class="product-price">25 €</p>
+                <p class="product-price" style="font-size: 24px; font-weight: 600; margin: 15px 0;">25 €</p>
 
-                <div class="product-specs">
+                <div class="product-specs" style="margin-bottom: 25px;">
                     <div><span>Coupe ample</span></div>
                     <div><span>Matière épaisse et confortable (100% coton)</span></div>
                     <div><span>Commande confirmée manuellement</span></div>
                 </div>
 
-                <div class="sizes-container">
-                    <span class="sizes-title">Tailles</span>
-                    <div class="sizes-box" role="group" aria-label="Choisir une taille">
+                <div class="sizes-container" style="margin-bottom: 20px;">
+                    <span class="sizes-title" style="display: block; margin-bottom: 10px;">Tailles</span>
+                    <div class="sizes-box" role="group" aria-label="Choisir une taille" style="display: flex; gap: 10px;">
                         <button class="size-btn" type="button">S</button>
                         <button class="size-btn" type="button">M</button>
                         <button class="size-btn" type="button">L</button>
-                        <button class="size-btn out-of-stock" type="button" disabled>XL</button>
+                        <button class="size-btn" type="button">XL</button>
                     </div>
                 </div>
 
-                <a href="panier.html" class="request-btn add-to-cart-btn">Faire une demande</a>
+                <div id="stock-indicator" class="stock-indicator" style="margin: 15px 0; font-weight: 500; font-size: 14px; min-height: 20px;"></div>
+
+                <button type="button" class="request-btn add-to-cart-btn" style="width: 100%; padding: 15px; cursor: pointer;">Faire une demande</button>
             </div>
+
         </section>
     </main>
 
@@ -108,7 +112,6 @@
         </div>
         <p class="footer-copy">© 2026 LÜN. Tous droits réservés.</p>
     </footer>
-
-    <script src="script.js"></script>
+<script type="module" src="script-product.js"></script>
 </body>
 </html>

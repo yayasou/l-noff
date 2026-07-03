@@ -785,29 +785,25 @@ section, .section {
     font-size: 13px;
     width: 100%;
 }
-/* ===== TRANSITION PREMIUM GALERIE ===== */
-
-.product-image-stage {
-    position: relative;
+/* Conteneur de l'image pour éviter que le zoom ne dépasse */
+.product-image-container {
     overflow: hidden;
+    position: relative;
+    background-color: #ffffff; /* Fond propre pendant la transition */
 }
 
-/* IMPORTANT : les images se superposent */
+/* Style premium pour l'image principale */
 .main-product-image {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 1;
-    transition: opacity 0.6s var(--ease), transform 0.8s var(--ease);
+    transform: scale(1);
+    will-change: opacity, transform;
 }
 
-/* image sortante / entrante plus smooth */
-.main-product-image.is-fading {
+/* État masqué : l'image s'efface doucement et grandit très légèrement */
+.main-product-image.fade-out {
     opacity: 0;
-    transform: scale(1.02);
+    transform: scale(1.02); /* Effet de zoom très subtil et haut de gamme */
 }
 
 
@@ -1411,4 +1407,41 @@ section, .section {
         opacity: 1;
         transform: translateY(0);
     }
+}
+/* ==========================================
+   INDICATEUR DE STOCK DYNAMIQUE (LÜN)
+   ========================================== */
+.stock-indicator {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888; /* Gris sobre */
+    margin-top: 12px;
+    min-height: 16px; /* Évite que la mise en page bouge quand le texte apparaît */
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateY(3px);
+}
+
+/* Classe activée en JavaScript pour l'animation d'apparition */
+.stock-indicator.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Optionnel : mettre en valeur s'il reste très peu de stock */
+.stock-indicator.low-stock {
+    color: #c9a054; /* Une couleur dorée/ambrée subtile ou reste en blanc/gris selon tes goûts */
+}
+
+/* Animation propre pour l'indicateur de stock */
+.stock-indicator {
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    transform: translateY(-5px);
+}
+
+.stock-indicator.show {
+    opacity: 1;
+    transform: translateY(0);
 }
