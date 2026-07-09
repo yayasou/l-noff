@@ -1261,8 +1261,13 @@ section, .section {
         grid-column: span 1;
     }
     .sub-options {
-        margin-left: 0;
-    }
+    margin-left: 22px;
+    display: flex; /* Tu peux le laisser ou le passer en block */
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px; /* Ajoute un espace avec le bouton radio du dessus */
+    transition: all 0.3s ease; /* Optionnel : adoucit l'apparition */
+}
 }
 /* ==========================================================
    ARCHIVES PAGE — LÜN EDITORIAL STYLE

@@ -73,16 +73,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let shipping = 0;
 
-        if (deliveryMethod === "livraison") {
-            if (shippingSubOptions) shippingSubOptions.style.display = "flex";
+    if (deliveryMethod === "livraison") {
+    if (shippingSubOptions) shippingSubOptions.style.display = "block"; // <-- Modifié "flex" par "block"
 
-            const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
-            if (selectedCarrier) {
-                shipping = shippingPrices[selectedCarrier.value] || 0;
-            }
-        } else {
-            if (shippingSubOptions) shippingSubOptions.style.display = "none";
-        }
+    const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
+    if (selectedCarrier) {
+        shipping = shippingPrices[selectedCarrier.value] || 0;
+    }
+} else {
+    if (shippingSubOptions) shippingSubOptions.style.display = "none";
+}
 
         if (shippingDisplay) {
             shippingDisplay.textContent = shipping === 0 ? "Gratuit" : shipping.toFixed(2) + " €";
