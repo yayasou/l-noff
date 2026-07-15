@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             try {
+                // On calcule les frais de port
                 const shipping =
                     method === "livraison"
                         ? (shippingPrices[carrier?.value] || 0)
@@ -170,7 +171,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (prixHidden) prixHidden.value = basePrice;
                 if (shippingHidden) shippingHidden.value = shipping;
                 if (totalHidden) totalHidden.value = basePrice + shipping;
-                if (carrierHidden) carrierHidden.value = carrier?.value || "";
+
+                // CORRECTION ICI : Si c'est un retrait, on vide le transporteur pour Formspark !
+                if (carrierHidden) {
+                    if (method === "livraison") {
+                        carrierHidden.value = carrier?.value || "";
+                    } else {
+                        carrierHidden.value = ""; // Devient vide pour le retrait
+                    }
+                }
+
+                // De plus, on désactive les boutons radios physiques pour qu'ils ne soient pas envoyés
+                if (method !== "livraison") {
+                    document.querySelectorAll('input[name="carrier"]').forEach(radio => {
+                        radio.disabled = true; // Empêche Formspark de lire mondial_relay/colissimo
+                    });
+                    if (relayInput) relayInput.disabled = true; // Empêche d'envoyer un point relais vide
+                }
 
                 const ref = doc(db, "products", "thI3NU9kSkaT22ZSc84m");
                 const snap = await getDoc(ref);
