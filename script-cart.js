@@ -192,13 +192,14 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
                 orderForm.submit(); 
-
-            } catch (err) {
+} catch (err) {
                 console.error(err);
-                alert("Erreur de traitement. Veuillez réessayer.");
+                // On affiche la vraie erreur technique pour savoir exactement ce qui coince !
+                alert("Erreur de traitement : " + err.message);
                 btn.disabled = false;
                 btn.textContent = "Envoyer la demande";
             }
+            
         });
     }
 });
