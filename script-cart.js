@@ -18,10 +18,10 @@ const db = getFirestore(app);
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-    const cart = JSON.parse(localStorage.getItem("lun_cart"));
-    if (!cart) return;
-
-    const basePrice = cart.price;
+    // Récupération sécurisée du panier
+    const cart = JSON.parse(localStorage.getItem("lun_cart")) || { price: 25.00, size: "M" }; // Valeurs de secours si panier vide
+    
+    const basePrice = cart.price || 25.00;
     const userSelectedSize = cart.size ? cart.size.trim() : "";
 
     const sizeSelect = document.querySelector('select[name="size"]');
@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const totalDisplay = document.getElementById("summary-total");
     const orderForm = document.querySelector(".order-form");
     const submitButton = document.querySelector(".order-form button[type='submit']");
+    const relayInput = document.getElementById("input-relais");
 
     // STOCK CHECK
     if (userSelectedSize) {
@@ -60,7 +61,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
         } catch (e) {
-            console.error(e);
+            console.error("Erreur de récupération du stock Firebase:", e);
         }
     }
 
@@ -73,16 +74,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         let shipping = 0;
 
-    if (deliveryMethod === "livraison") {
-    if (shippingSubOptions) shippingSubOptions.style.display = "block"; // <-- Modifié "flex" par "block"
+        if (deliveryMethod === "livraison") {
+            if (shippingSubOptions) {
+                shippingSubOptions.style.display = "block"; 
+            }
 
-    const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
-    if (selectedCarrier) {
-        shipping = shippingPrices[selectedCarrier.value] || 0;
-    }
-} else {
-    if (shippingSubOptions) shippingSubOptions.style.display = "none";
-}
+            // Récupère le transporteur actuellement coché
+            const selectedCarrier = document.querySelector('input[name="carrier"]:checked');
+            if (selectedCarrier) {
+                shipping = shippingPrices[selectedCarrier.value] || 0;
+
+                // GESTION DYNAMIQUE DU REQUIRED
+                if (selectedCarrier.value === "mondial_relay") {
+                    if (relayInput) relayInput.required = true;
+                } else {
+                    if (relayInput) {
+                        relayInput.required = false;
+                        relayInput.setCustomValidity(""); // Enlève les erreurs de blocage du navigateur
+                    }
+                }
+            }
+        } else {
+            if (shippingSubOptions) {
+                shippingSubOptions.style.display = "none"; 
+            }
+            shipping = shippingPrices["retrait_malakoff"] || 0;
+            if (relayInput) {
+                relayInput.required = false;
+                relayInput.setCustomValidity(""); // Enlève les erreurs de blocage du navigateur
+            }
+        }
 
         if (shippingDisplay) {
             shippingDisplay.textContent = shipping === 0 ? "Gratuit" : shipping.toFixed(2) + " €";
@@ -93,52 +114,49 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    document.querySelectorAll('input[name="carrier"], input[name="delivery_method"]')
-        .forEach(i => i.addEventListener("change", updateTotal));
+    // On écoute les changements sur TOUS les boutons radios du formulaire de livraison
+    document.querySelectorAll('input[name="carrier"], input[name="delivery_method"]').forEach(i => {
+        i.addEventListener("change", () => {
+            updateTotal();
+        });
+    });
 
+    // Initialisation directe au chargement de la page
     updateTotal();
 
     // SUBMIT
     if (orderForm) {
-
         orderForm.addEventListener("submit", async (e) => {
-    // 1. AJOUTE ÇA TOUT EN HAUT DU SUBMIT :
-    if (!orderForm.checkValidity()) {
-        // Si le HTML dit qu'il manque un champ, on laisse le comportement normal du navigateur afficher les alertes
-        return; 
-    }
+            // Si le HTML dit qu'il manque un champ (ex: nom, email, etc.), on laisse faire le navigateur
+            if (!orderForm.checkValidity()) {
+                return; 
+            }
 
-    // On bloque l'envoi classique seulement si le formulaire est valide, pour pouvoir faire le traitement Firebase
-    e.preventDefault();
+            e.preventDefault();
 
-    const btn = submitButton;
-    if (!btn || btn.disabled) return;
-    
-    // ... tout le reste de ton code Firebase actuel ...
+            const btn = submitButton;
+            if (!btn || btn.disabled) return;
 
             btn.disabled = true;
             btn.textContent = "Traitement...";
 
             const method = document.querySelector('input[name="delivery_method"]:checked')?.value;
             const carrier = document.querySelector('input[name="carrier"]:checked');
-            const relayInput = document.getElementById("input-relais");
 
-            // RELAIS OBLIGATOIRE
+            // Double sécurité de validation pour Mondial Relay
             if (
                 method === "livraison" &&
                 carrier?.value === "mondial_relay" &&
-                relayInput.value.trim() === ""
+                (!relayInput || relayInput.value.trim() === "")
             ) {
                 alert("Merci de renseigner votre Point Relais");
-
                 btn.disabled = false;
                 btn.textContent = "Envoyer la demande";
-                relayInput.focus();
+                if (relayInput) relayInput.focus();
                 return;
             }
 
             try {
-
                 const shipping =
                     method === "livraison"
                         ? (shippingPrices[carrier?.value] || 0)
@@ -163,7 +181,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                     if (!stock || stock[size] <= 0) {
                         alert("Produit indisponible");
-
                         btn.disabled = false;
                         btn.textContent = "Envoyer la demande";
                         return;
@@ -176,11 +193,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 orderForm.submit(); 
 
-        } catch (err) {
+            } catch (err) {
                 console.error(err);
-
-                alert("Erreur");
-
+                alert("Erreur de traitement. Veuillez réessayer.");
                 btn.disabled = false;
                 btn.textContent = "Envoyer la demande";
             }
