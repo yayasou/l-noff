@@ -11,16 +11,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: 📂 Sync files via SFTP
-        uses: nwtgck/actions-sftp@v2
-        with:
-          ssh-private-key: '' # Non utilisé si on passe par mot de passe
-          remote-path: './' # Dossier distant sur ton serveur
-          args: '-o StrictHostKeyChecking=no'
+      - name: 📂 Transfer files via SFTP
         env:
-          SFTP_HOST: ${{ secrets.FTP_SERVER }}
-          SFTP_PORT: '22'
-          SFTP_USER: ${{ secrets.FTP_USERNAME }}
-          SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          SFTP_REMOTE_PATH: './'
-          SFTP_LOCAL_PATH: './'
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get install -y sshpass
+          sshpass -p "$FTP_PASSWORD" sftp -o StrictHostKeyChecking=no -P 22 "$FTP_USERNAME@$FTP_SERVER" << 'EOF'
+          put -r ./ ./
+          bye
+          EOF
