@@ -1,24 +1,22 @@
-name: 🚀 Deploy Website to LWS
+name: Deploy to LWS SFTP
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  web-deploy:
-    name:  Sync Files
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name:  Get latest code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name:  Sync files to LWS FTP
+      - name: 📂 Sync files via SFTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          concurrency: 2
+          port: 22
+          protocol: sftp
+          local-dir: ./ 
