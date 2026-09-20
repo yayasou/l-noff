@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LÜN — Été 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-main">
+            <div class="header-spacer"></div>
+            <a href="index.html" class="brand" aria-label="Accueil LÜN">
+                <img src="logo.png" alt="LÜN">
+            </a>
+            <div class="header-tools">
+                <label class="search-shell">
+                    <input type="search" class="search-custom" placeholder="Recherche un produit" aria-label="Recherche un produit">
+                </label>
+                <a href="panier.html" class="header-order-link">Demande</a>
+            </div>
+        </div>
+        <nav class="nav-links" aria-label="Navigation principale">
+            <a href="nouveautes.html">Nouveautés</a>
+            <a href="collections.html">Collections</a>
+            <a href="ete-2026.html">Dernier Drop</a>
+            <a href="archives.html">Archives</a>
+        </nav>
+    </header>
+
+    <main class="drop-page product-page">
+        <section class="collection-product" id="collection-ete-2026">
+            <div class="collection-product-heading">
+                <p class="eyebrow">ÉTÉ 2026</p>
+                <h1>Pièce 001 — Le premier</h1>
+            </div>
+
+            <div class="product-feature">
+                <div class="product-left">
+                    <div class="product-image-stage">
+                        <img src="tshirt-face.PNG" alt="T-shirt LÜN blanc face" class="product-img main-product-image is-active">
+                    </div>
+
+                    <div class="product-thumbnails">
+                        <button class="thumb-btn is-active" data-src="tshirt-face.PNG" type="button">
+                            <img src="tshirt-face.PNG" alt="Miniature Face">
+                        </button>
+                        <button class="thumb-btn" data-src="tshirt-dos.PNG" type="button">
+                            <img src="tshirt-dos.PNG" alt="Miniature Dos">
+                        </button>
+                        <button class="thumb-btn" data-src="tshirt-porte.JPG" type="button">
+                            <img src="tshirt-porte.JPG" alt="Miniature Porté">
+                        </button>
+                        <button class="thumb-btn" data-src="tshirt-zoom.JPG" type="button">
+                            <img src="tshirt-zoom.JPG" alt="Miniature Zoom">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-right">
+                    <p class="eyebrow">Pièce 001</p>
+                    <h2>Le premier</h2>
+                    <p class="product-lead">T-shirt unisexe à coupe ample. Coton dense, tombé droit, marquage discret. Pensé pour l'été urbain.</p>
+                    <p class="product-price">25 €</p>
+
+                    <div class="product-specs">
+                        <div><span>Coupe ample</span></div>
+                        <div><span>Matière épaisse et confortable (100% coton)</span></div>
+                        <div><span>Commande confirmée manuellement</span></div>
+                    </div>
+
+                    <div class="sizes-container">
+                        <span class="sizes-title">Tailles</span>
+                        <div class="sizes-box" role="group" aria-label="Choisir une taille">
+                            <button class="size-btn" type="button">S</button>
+                            <button class="size-btn" type="button">M</button>
+                            <button class="size-btn" type="button">L</button>
+                            <button class="size-btn" type="button">XL</button>
+                        </div>
+                    </div>
+
+                    <div id="stock-indicator" class="stock-indicator"></div>
+
+                    <button type="button" class="request-btn add-to-cart-btn">AJOUTER AU PANIER</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-socials">
+            <a href="https://www.tiktok.com/@lunofc1" target="_blank" rel="noreferrer" aria-label="TikTok LÜN"><img src="tiktok%20bouton.svg" alt=""></a>
+            <a href="https://www.instagram.com/lunofc01/" target="_blank" rel="noreferrer" aria-label="Instagram LÜN"><img src="instagram%20bouton.svg" alt=""></a>
+        </div>
+        <div class="footer-links">
+            <a href="#" data-legal-modal="mentions">Mentions légales</a>
+            <a href="#" data-legal-modal="cgv">CGV</a>
+            <a href="#" data-legal-modal="contact">Contact</a>
+        </div>
+        <p class="footer-copy">© 2026 LÜN OFF</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="legal-modal.js"></script>
+    <script type="module" src="script-product.js"></script>
+</body>
+</html>

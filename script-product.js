@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                             stockIndicator.style.color = "#ff9900";
                         } else {
                             stockIndicator.textContent = `Stock disponible : ${stockQuantity} pièces en taille ${selectedSize}`;
-                            stockIndicator.style.color = "#333333";
+                            stockIndicator.style.color = "#b8b8b8";
                         }
                     }
                     stockIndicator.classList.add("show");
@@ -178,14 +178,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             const itemToCart = {
-                name: "Le premier",
+                name: "Pièce 001 — Le premier",
                 price: 25.00,
                 size: selectedSize,
                 image: "tshirt-face.PNG"
             };
 
             localStorage.setItem("lun_cart", JSON.stringify(itemToCart));
-            alert(`Taille ${selectedSize} ajoutée au panier !`);
+            alert(`Taille ${selectedSize} ajoutée au panier.`);
             window.location.href = "panier.html";
         });
     }

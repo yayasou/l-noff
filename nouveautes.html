@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LÜN — Nouveautés 2026</title>
+    <title>LÜN — Nouveautés</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,8 +12,7 @@
 <body>
     <header class="site-header">
         <div class="header-main">
-            <div></div> 
-            
+            <div class="header-spacer"></div>
             <a href="index.html" class="brand" aria-label="Accueil LÜN">
                 <img src="logo.png" alt="LÜN">
             </a>
@@ -24,79 +23,23 @@
                 <a href="panier.html" class="header-order-link">Demande</a>
             </div>
         </div>
-        
         <nav class="nav-links" aria-label="Navigation principale">
             <a href="nouveautes.html">Nouveautés</a>
-            <a href="nouveautes.html#collection">Collections</a>
-            <a href="nouveautes.html">Dernier Drop</a>
+            <a href="collections.html">Collections</a>
+            <a href="ete-2026.html">Dernier Drop</a>
             <a href="archives.html">Archives</a>
         </nav>
     </header>
 
-    <main class="drop-page">
-        <section class="drop-intro">
-            <p class="eyebrow">LÜN — Nouveautés 2026</p>
-            <h1>Le vêtement suit le rythme, pas la tendance.</h1>
-            <p>Cette nouvelle collection célèbre l'esthétique urbaine de la couronne parisienne. Nos pièces pour cet été allient sobriété, densité et mouvement.</p>
+    <main class="drop-page news-page">
+        <section class="drop-intro news-intro">
+            <p class="eyebrow">Nouveautés</p>
+            <h1>NOUVEAUTÉS</h1>
+            <p>NOUVEAUTÉ AUTOMNE 2026</p>
         </section>
 
-        <section class="drop-status">
-            <div class="drop-status-card">
-                <span>LÜN Summer Drop // Coming soon</span>
-            </div>
-            <p>03 / Drop été 2026 — bientôt disponible</p>
-        </section>
-
-        <section class="product-feature" style="display: flex; gap: 40px; align-items: flex-start; max-width: 1200px; margin: 0 auto; padding: 20px;">
-            
-            <div class="product-left" style="flex: 1; min-width: 300px;">
-                <div class="product-image-stage">
-                    <img src="tshirt-face.PNG" alt="T-shirt LÜN blanc face" class="product-img main-product-image is-active" style="width: 100%; height: auto;">
-                </div>
-
-                <div class="product-thumbnails" style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button class="thumb-btn is-active" data-src="tshirt-face.PNG">
-                        <img src="tshirt-face.PNG" alt="Miniature Face">
-                    </button>
-                    <button class="thumb-btn" data-src="tshirt-dos.PNG">
-                        <img src="tshirt-dos.PNG" alt="Miniature Dos">
-                    </button>
-                    <button class="thumb-btn" data-src="tshirt-porte.JPG">
-                        <img src="tshirt-porte.JPG" alt="Miniature Porté">
-                    </button>
-                    <button class="thumb-btn" data-src="tshirt-zoom.JPG">
-                        <img src="tshirt-zoom.JPG" alt="Miniature Zoom">
-                    </button>
-                </div>
-            </div>
-
-            <div class="product-right" style="flex: 1; min-width: 300px;">
-                <p class="eyebrow">Pièce 001</p>
-                <h2>Le premier</h2>
-                <p class="product-lead">T-shirt unisexe à coupe ample. Coton dense, tombé droit, marquage discret. Pensé pour l'été urbain.</p>
-                <p class="product-price" style="font-size: 24px; font-weight: 600; margin: 15px 0;">25 €</p>
-
-                <div class="product-specs" style="margin-bottom: 25px;">
-                    <div><span>Coupe ample</span></div>
-                    <div><span>Matière épaisse et confortable (100% coton)</span></div>
-                    <div><span>Commande confirmée manuellement</span></div>
-                </div>
-
-                <div class="sizes-container" style="margin-bottom: 20px;">
-                    <span class="sizes-title" style="display: block; margin-bottom: 10px;">Tailles</span>
-                    <div class="sizes-box" role="group" aria-label="Choisir une taille" style="display: flex; gap: 10px;">
-                        <button class="size-btn" type="button">S</button>
-                        <button class="size-btn" type="button">M</button>
-                        <button class="size-btn" type="button">L</button>
-                        <button class="size-btn" type="button">XL</button>
-                    </div>
-                </div>
-
-                <div id="stock-indicator" class="stock-indicator" style="margin: 15px 0; font-weight: 500; font-size: 14px; min-height: 20px;"></div>
-
-                <button type="button" class="request-btn add-to-cart-btn" style="width: 100%; padding: 15px; cursor: pointer;">Faire une demande</button>
-            </div>
-
+        <section class="coming-soon-frame" aria-label="Nouveauté Automne 2026">
+            <span>BIENTÔT DISPONIBLE</span>
         </section>
     </main>
 
@@ -106,12 +49,14 @@
             <a href="https://www.instagram.com/lunofc01/" target="_blank" rel="noreferrer" aria-label="Instagram LÜN"><img src="instagram%20bouton.svg" alt=""></a>
         </div>
         <div class="footer-links">
-            <a href="panier.html#infos">Mentions légales</a>
-            <a href="panier.html#infos">CGV</a>
-            <a href="panier.html#contact">Contact</a>
+            <a href="#" data-legal-modal="mentions">Mentions légales</a>
+            <a href="#" data-legal-modal="cgv">CGV</a>
+            <a href="#" data-legal-modal="contact">Contact</a>
         </div>
         <p class="footer-copy">© 2026 LÜN. Tous droits réservés.</p>
     </footer>
-<script type="module" src="script-product.js"></script>
+
+    <script src="script.js"></script>
+    <script src="legal-modal.js"></script>
 </body>
 </html>

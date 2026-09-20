@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LÜN — Merci</title>
+    <title>LÜN — Collections</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,22 +31,37 @@
         </nav>
     </header>
 
-    <main class="drop-page thankyou-wrapper">
-        <p class="eyebrow">Demande reçue</p>
-        <h1 style="margin: 20px auto; font-size: 24px; max-width: 600px;">Votre demande a bien été enregistrée.</h1>
-        
-        <p class="product-lead" style="margin: 0 auto 40px auto; max-width: 500px;">
-            Veuillez vérifier votre boîte mail (ainsi que vos spams). Un membre de l'équipe LÜN va examiner votre demande sous 24h pour valider la disponibilité de la taille.
-        </p>
+    <main class="drop-page collections-page">
+        <section class="drop-intro collections-intro">
+            <p class="eyebrow">Collections</p>
+            <h1>COLLECTIONS</h1>
+        </section>
 
-        <div class="thankyou-status">
-    <p>Statut de la demande</p>
-    <span>En cours de vérification ⏳</span>
-</div>
+        <section class="collection-overview" aria-label="Collections LÜN">
+            <div class="collection-grid">
+                <a href="ete-2026.html" class="collection-card is-live">
+                    <img src="tshirt-porte.JPG" alt="Collection été 2026 LÜN">
+                    <span>ÉTÉ 2026</span>
+                    <div>
+                        <p>Pièce 001 — Le premier</p>
+                        <small>Collection disponible</small>
+                    </div>
+                </a>
 
-        <div style="margin-top: 20px;">
-            <a href="index.html" class="request-btn">Retour à l'accueil</a>
-        </div>
+                <article class="collection-card is-soon collection-card-empty">
+                    <div class="collection-placeholder" aria-hidden="true"></div>
+                    <span>AUTOMNE 2026</span>
+                    <div>
+                        <p>BIENTÔT DISPONIBLE</p>
+                        <small>NOUVEAUTÉ</small>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="collection-note">
+            <p>Nouvelle capsule en préparation.</p>
+        </section>
     </main>
 
     <footer class="site-footer">
@@ -61,6 +76,7 @@
         </div>
         <p class="footer-copy">© 2026 LÜN OFF</p>
     </footer>
+
     <script src="script.js"></script>
     <script src="legal-modal.js"></script>
 </body>
