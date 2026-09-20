@@ -1,22 +1,21 @@
-name: Deploy site to LWS
+name: 🚀 Deploy Website to LWS
 
 on:
   push:
     branches:
-      - main  # ou 'master' selon le nom de ta branche sur GitHub
+      - main
 
 jobs:
   web-deploy:
-    name: Deploy
+    name: 🔄 Sync Files
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
-      uses: actions/checkout@v4
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
 
-    - name: Sync files to LWS
-      uses: SamKirsch/ftp-deploy-action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /htdocs/  # Ou /public_html/ selon ton dossier racine LWS
+      - name: 📂 Sync files to LWS FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
