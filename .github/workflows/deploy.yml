@@ -12,11 +12,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: 📂 Sync files via SFTP
-        uses: Creepinson/sftp-action@v1.2.0
+        uses: nwtgck/actions-sftp@v2
         with:
-          host: ${{ secrets.FTP_SERVER }}
-          port: 22
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './'
-          remote_path: './'
+          ssh-private-key: '' # Non utilisé si on passe par mot de passe
+          remote-path: './' # Dossier distant sur ton serveur
+          args: '-o StrictHostKeyChecking=no'
+        env:
+          SFTP_HOST: ${{ secrets.FTP_SERVER }}
+          SFTP_PORT: '22'
+          SFTP_USER: ${{ secrets.FTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          SFTP_REMOTE_PATH: './'
+          SFTP_LOCAL_PATH: './'
